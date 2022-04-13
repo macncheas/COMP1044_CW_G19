@@ -1,0 +1,49 @@
+*{
+    margin: 0px;
+    padding: 12px;
+    box-sizing: border-box;
+    background-image: url("lib1.png");
+    background-repeat: repeat-x;
+    background-position: 20% -8%;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 10vh;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: bisque;
+}
+
+.head{
+    color: black;
+    letter-spacing: 10px;
+    font-size: 20px;
+}
+
+.links{
+    display: flex;
+    text-align: right;
+    justify-content: space-around;
+    width: 40%;
+    color: black;
+  
+}
+
+nav .links{
+    list-style: none;
+    color: white;
+
+}
+
+.links a{
+
+    color: black;
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
