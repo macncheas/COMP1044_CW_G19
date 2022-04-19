@@ -26,52 +26,90 @@
         </div> 
     </nav>
 
+  
     <div class="table">
-        <h2>List of Members</h2>
-        <table>
+
+      <div>
+        <h2>List of Members</h2> 
+
+        <span id="searchbar">
+          <input type="text" id="search" onkeyup="search()" placeholder="Search..">
+        </span>
+      <div>
+
+      <div class = "table_members">
+      
+        <table id="Members">
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
+              <th>ID</th>
               <th>Gender</th>
               <th>Address</th>
               <th>Contact</th>
-              <th>Level</th>
+              <th>Year/level</th>
               <th>Status</th>
+      
             </tr>
             <tr>
               <td>Alfreds Futterkiste</td>
               <td>Maria Anders</td>
               <td>Germany</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td> <img src="trash.png" alt="Trash"/> </td>
+              <td>  <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/> </td>
+            
             </tr>
             <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
+              <td>Alfreds Futterkiste</td>
+              <td>Maria Anders</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td>dfcgvh</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td>Germany</td>
+              <td> <img src="trash.png" alt="Trash"/> </td>
+              <td> <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
             </tr>
-            <tr>
-              <td>Ernst Handel</td>
-              <td>Roland Mendel</td>
-              <td>Austria</td>
-            </tr>
-            <tr>
-              <td>Island Trading</td>
-              <td>Helen Bennett</td>
-              <td>UK</td>
-            </tr>
-            <tr>
-              <td>Laughing Bacchus Winecellars</td>
-              <td>Yoshi Tannamuri</td>
-              <td>Canada</td>
-            </tr>
-            <tr>
-              <td>Magazzini Alimentari Riuniti</td>
-              <td>Giovanni Rovelli</td>
-              <td>Italy</td>
-            </tr>
+
           </table>
+      </div>
     </div>
 
+    <script>
 
+      //function to search table
+
+      function search(){
+
+        var input, filter, table, tr, td, i, txtValue;
+
+        //get the input user typed
+        input = document.getElementById("search");
+  
+        filter = input.value.toUpperCase();
+        table = document.getElementById("Members");
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+        }
+      }
+      </script>
   
 
 </body>
