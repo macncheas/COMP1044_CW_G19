@@ -2,8 +2,8 @@
 
     $servername = "localhost";
     $username = "root";
-    $password = "";
-    $dbname = "MariaDB";
+    $password = "typePASSWORD";
+    $dbname = "Library";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,12 +18,12 @@
         $uname = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM `user` WHERE /*Password='.$password' AND */Username='.$uname' limit 1";
+        $sql = "SELECT * FROM `user` WHERE Password='$password' AND Username='$uname' limit 1";
 
         $result = $conn->query($sql);
         echo "Result obtained<br>";
         if ($result->num_rows > 0){
-            echo "You have successfully logged in";
+            header('Location: library.html');
             exit();
         }
         else{
@@ -36,7 +36,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" a href="style.css">
+	<link rel="stylesheet" a href="styletest.css">
 </head>
 <body>
 
@@ -48,10 +48,10 @@
 		<form method="POST" action="#">
 		
 			<div class="form-input">
-				<input type="text" name="username" placeholder="Username"/>	
+				<input type="text" name="username" placeholder="Username" required/>	
 			</div>
 			<div class="form-input">
-				<input type="password" name="password" placeholder="Password"/>
+				<input type="password" name="password" placeholder="Password" required/>
 			</div>
 			<input type="submit" type="submit" value="LOGIN" class="loginbtn"/>
 		</form>
