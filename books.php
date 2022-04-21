@@ -1,3 +1,33 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "MariaDB";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT Book_id, Book_title, Catergory_id, Author, Book_copies, Book_pub, Publisher_name, Isbn, Copyright_year, Date_added, Status FROM book";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "Title: ". ucwords($row["Book_title"]). " - Category ID: ". $row["Catergory_id"]. 
+            " - Author: ". ucwords($row["Author"]). " - Date Published: NULL - ISBN: ". $row["Isbn"]. 
+            " - Copies Available: ". $row["Book_copies"]. " - Status: ". ucwords($row["Status"]). 
+            " - Date Added: ". $row["Date_added"]. "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
