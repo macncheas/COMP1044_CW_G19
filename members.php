@@ -12,24 +12,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT Firstname, Lastname, Member_id, Gender, Address, Contact, Borrowtype, Year_level, Status FROM member";
+    $sql = "SELECT * FROM member";
     $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "First name: ". ucwords($row["Firstname"]). " - Last name: ". ucwords($row["Lastname"]). " - Member ID: ". $row["Member_id"]. " - Gender: ". $row["Gender"]
-            . " - Address: ". ucwords($row["Address"]). " - Contact: ". $row["Contact"]. " - Year/Level: ". $row["Year_level"]. " - Status: ". ucwords($row["Status"]). "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
     $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styletest.css">
     <title>My Library</title>
 </head>
 <body>
@@ -75,36 +66,36 @@
               <th>Gender</th>
               <th>Address</th>
               <th>Contact</th>
+              <th>Type</th>
               <th>Year/level</th>
               <th>Status</th>
       
             </tr>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td> <img src="trash.png" alt="Trash"/> </td>
-              <td>  <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/> </td>
-            
-            </tr>
+            <?php   // LOOP TILL END OF DATA 
+                while($rows=$result->fetch_assoc())
+                {
+             ?>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>dfcgvh</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td> <img src="trash.png" alt="Trash"/> </td>
-              <td> <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+                <!--FETCHING DATA FROM EACH 
+                    ROW OF EVERY COLUMN-->
+                <td><?php echo $rows['Firstname'];?></td>
+                <td><?php echo $rows['Lastname'];?></td>
+                <td><?php echo $rows['Member_id'];?></td>
+                <td><?php echo $rows['Gender'];?></td>
+                <td><?php echo $rows['Address'];?></td>
+                <td><?php echo $rows['Contact'];?></td>
+                <td><?php echo $rows['Borrowertype'];?></td>
+                <td><?php echo $rows['Year_level'];?></td>
+                <td><?php echo $rows['Status'];?></td>
+                <td> <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+                <td> <img src="trash.png" alt="Trash"/>  </td>
+  
             </tr>
-
+            <?php
+                }
+             ?>
+       
           </table>
       </div>
     </div>
