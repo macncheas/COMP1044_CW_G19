@@ -1,3 +1,30 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "MariaDB";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT Borrow_id, Member_id, Date_Borrow, Due_date FROM borrow";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "Borrow ID: ". $row["Borrow_id"]. " - Member ID: ". $row["Member_id"]. " - Date_Borrow: ". $row["Date_Borrow"]. " - Due Date: ". $row["Due_date"]. "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
