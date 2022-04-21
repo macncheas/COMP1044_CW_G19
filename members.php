@@ -1,3 +1,31 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "MariaDB";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT Firstname, Lastname, Member_id, Gender, Address, Contact, Borrowtype, Year_level, Status FROM member";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+            echo "First name: ". ucwords($row["Firstname"]). " - Last name: ". ucwords($row["Lastname"]). " - Member ID: ". $row["Member_id"]. " - Gender: ". $row["Gender"]
+            . " - Address: ". ucwords($row["Address"]). " - Contact: ". $row["Contact"]. " - Year/Level: ". $row["Year_level"]. " - Status: ". ucwords($row["Status"]). "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
