@@ -1,8 +1,8 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "";
-    $dbname = "MariaDB";
+    $password = "typePASSWORD";
+    $dbname = "Lib";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,23 +12,15 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT Borrow_id, Member_id, Date_Borrow, Due_date FROM borrow";
+    $sql = "SELECT * FROM borrow , borrowdetails";
     $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "Borrow ID: ". $row["Borrow_id"]. " - Member ID: ". $row["Member_id"]. " - Date_Borrow: ". $row["Date_Borrow"]. " - Due Date: ". $row["Due_date"]. "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
     $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styletest.css">
     <title>My Library</title>
 </head>
 <body>
@@ -66,29 +58,27 @@
               <th>Status</th>
               
             </tr>
+            <?php   // LOOP TILL END OF DATA 
+                while($rows=$result->fetch_assoc())
+                {
+             ?>
             <tr>
-              <td>111 Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany </td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>  <a href="updateborrow.html" target="_top"> <img src="edit.png" alt="Edit"/> </td>
-            
+                <!--FETCHING DATA FROM EACH 
+                    ROW OF EVERY COLUMN-->
+                <td><?php echo $rows['Borrow_id'];?></td>
+                <td><?php echo $rows['Book_id'];?></td>
+                <td><?php echo $rows['Member_id'];?></td>
+                <td><?php echo $rows['Date_borrow'];?></td>
+                <td><?php echo $rows['Due_date'];?></td>
+                <td><?php echo $rows['Date_return'];?></td>
+                <td><?php echo $rows['Borrow_status'];?></td>
+                <td> <a href="updateborrow.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+  
             </tr>
-            <tr>
-              <td>Centro zuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
-              <td>Mexico</td>
-              <td>  <a href="updateborrow.html" target="_top"> <img src="edit.png" alt="Edit"/> </td>
-
-            
-            </tr>
+            <?php
+                }
+             ?>
+       
           </table>
     </div>
 
