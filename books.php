@@ -1,8 +1,8 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "";
-    $dbname = "MariaDB";
+    $password = "typePASSWORD";
+    $dbname = "Lib";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,24 +14,13 @@
 
     $sql = "SELECT Book_id, Book_title, Catergory_id, Author, Book_copies, Book_pub, Publisher_name, Isbn, Copyright_year, Date_added, Status FROM book";
     $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "Title: ". ucwords($row["Book_title"]). " - Category ID: ". $row["Catergory_id"]. 
-            " - Author: ". ucwords($row["Author"]). " - Date Published: NULL - ISBN: ". $row["Isbn"]. 
-            " - Copies Available: ". $row["Book_copies"]. " - Status: ". ucwords($row["Status"]). 
-            " - Date Added: ". $row["Date_added"]. "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
     $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styletest.css">
     <title>My Library</title>
 </head>
 <body>
@@ -75,7 +64,8 @@
               <th>Category</th>
               <th>Author</th>
               <th>Publisher</th>
-              <th>Date published</th>
+              <th>Publisher Name</th>
+              <th>Copyright year</th>
               <th>ISBN</th>
               <th>Copies Available</th>
               <th>Status</th>
@@ -83,44 +73,30 @@
       
             </tr>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td> <img src="trash.png" alt="Trash"/>  </td>
+            <?php   // LOOP TILL END OF DATA 
+                while($rows=$result->fetch_assoc())
+                {
+             ?>
+            <tr>
+                <!--FETCHING DATA FROM EACH 
+                    ROW OF EVERY COLUMN-->
+                <td><?php echo $rows['Book_title'];?></td>
+                <td><?php echo $rows['Catergory_id'];?></td>
+                <td><?php echo $rows['Author'];?></td>
+                <td><?php echo $rows['Book_pub'];?></td>
+                <td><?php echo $rows['Publisher_name'];?></td>
+                <td><?php echo $rows['Copyright_year'];?></td>
+                <td><?php echo $rows['Isbn'];?></td>
+                <td><?php echo $rows['Book_copies'];?></td>
+                <td><?php echo $rows['Status'];?></td>
+                <td><?php echo $rows['Date_added'];?></td>
+                <td> <img src="trash.png" alt="Trash"/>  </td>
   
+            </tr>
+            <?php
+                }
+             ?>
             
-            </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>dfcgvh</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>  <img src="trash.png" alt="Trash"/>  </td>
-            </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>  <img src="trash.png" alt="Trash"/>  </td>
-
-            </tr>
           </table>
       </div>
     </div>
