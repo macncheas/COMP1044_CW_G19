@@ -61,7 +61,7 @@
                 <td><?php echo $rows['Due_date'];?></td>
                 <td><?php echo $rows['Date_return'];?></td>
                 <td><?php echo $rows['Borrow_status'];?></td>
-                <td> <a href="updateborrow.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+                <td> <a href="updateborrow.php" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
   
             </tr>
             <?php
