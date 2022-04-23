@@ -1,18 +1,7 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "typePASSWORD";
-    $dbname = "Lib";
+    include('connection.php');
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT * FROM borrow , borrowdetails";
+    $sql = "SELECT * FROM borrowdetails";
     $result = $conn->query($sql);
     $conn->close();
 ?>
@@ -20,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styletest.css">
+    <link rel="stylesheet" href="style.css">
     <title>My Library</title>
 </head>
 <body>
@@ -31,16 +20,16 @@
 
         <div class="links">
             <li>
-                <a href="books.html">MY COLLECTION</a>
+                <a href="books.php">MY COLLECTION</a>
             </li>
             <li>
-                <a href="borrow.html">BORROW</a>
+                <a href="borrow.php">BORROW</a>
             </li>
             <li>
-                <a href="members.html">MEMBERS</a>
+                <a href="members.php">MEMBERS</a>
             </li>
             <li>
-                <a href="loginPage.html">LOG OUT</a>
+                <a href="loginPage.php">LOG OUT</a>
             </li>
         </div> 
     </nav>
