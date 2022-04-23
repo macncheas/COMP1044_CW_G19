@@ -70,8 +70,14 @@
             </div>
 
             <div>
-                <label class="heading">STATUS</label> <br>
-                <input class="input" type="text" name="status" required>
+            <label>STATUS</label> <br>
+            <select name="status">
+            <option value="arch">Archive</option>
+            <option value="dmg">Damage</option>
+            <option value="lost">Lost</option>
+            <option value="new">New</option>
+            <option value="old">Old</option>
+            </select>
             </div>
     
         </form>
@@ -82,18 +88,25 @@
 
 <?php
 
-$ti=$_GET['title'];
-$ca=$_GET['category'];
-$au=$_GET['author'];
-$pu=$_GET['publisher'];
-$pn=$_GET['publisher_name'];
-$cy=$_GET['copyright_year'];
-$ca=$_GET['copies_avail'];
-$st=$_GET['status'];
+    include('connection.php');  
 
-echo "$ti";
-echo "$ca";
-echo "$au";
+    $ti=$_GET['title'];
+    $ca=$_GET['category'];
+    $au=$_GET['author'];
+    $pu=$_GET['publisher'];
+    $pn=$_GET['publisher_name'];
+    $cy=$_GET['copyright_year'];
+    $ca=$_GET['copies_avail'];
+    $st=$_GET['status'];
+
+    $sql = "INSERT INTO `book`(`Book_title`, `Catergory_id`, `Author`,
+            `Book_pub`, `Publisher_name`, `Copyright_year`, `Book_copies`,
+             `Status`) VALUES ('$ti','$ca','$au','$pu','$pn','$cy','$ca',
+             '$st')";
+
+    echo "$ti";
+    echo "$ca";
+    echo "$au";
 
 
 ?>
