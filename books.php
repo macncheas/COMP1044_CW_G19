@@ -1,26 +1,17 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "typePASSWORD";
-    $dbname = "Lib";
+    
+    include('connection.php');
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT Book_id, Book_title, Catergory_id, Author, Book_copies, Book_pub, Publisher_name, Isbn, Copyright_year, Date_added, Status FROM book";
+    $sql = "SELECT * FROM book";
     $result = $conn->query($sql);
     $conn->close();
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="styletest.css">
+    <link rel="stylesheet" href="style.css">
     <title>My Library</title>
 </head>
 <body>
@@ -31,16 +22,16 @@
 
         <div class="links">
             <li>
-                <a href="books.html">MY COLLECTION</a>
+                <a href="books.php">MY COLLECTION</a>
             </li>
             <li>
-                <a href="borrow.html">BORROW</a>
+                <a href="borrow.php">BORROW</a>
             </li>
             <li>
-                <a href="members.html">MEMBERS</a>
+                <a href="members.php">MEMBERS</a>
             </li>
             <li>
-                <a href="loginPage.html">LOG OUT</a>
+                <a href="login_page.php">LOG OUT</a>
             </li>
         </div> 
     </nav>
@@ -60,6 +51,7 @@
       
         <table id="Books">
             <tr>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Author</th>
@@ -72,35 +64,31 @@
               <th>Date Added</th>
       
             </tr>
-            <tr>
+            
             <?php   // LOOP TILL END OF DATA 
                 while($rows=$result->fetch_assoc())
                 {
-             ?>
-            <tr>
-                <!--FETCHING DATA FROM EACH 
-                    ROW OF EVERY COLUMN-->
-                <td><?php echo $rows['Book_title'];?></td>
-                <td><?php echo $rows['Catergory_id'];?></td>
-                <td><?php echo $rows['Author'];?></td>
-                <td><?php echo $rows['Book_pub'];?></td>
-                <td><?php echo $rows['Publisher_name'];?></td>
-                <td><?php echo $rows['Copyright_year'];?></td>
-                <td><?php echo $rows['Isbn'];?></td>
-                <td><?php echo $rows['Book_copies'];?></td>
-                <td><?php echo $rows['Status'];?></td>
-                <td><?php echo $rows['Date_added'];?></td>
-                <td> <img src="trash.png" alt="Trash"/>  </td>
-  
-            </tr>
-            <?php
+                  echo "
+                  <tr>
+                  <td>".$rows['Book_id']."</td>
+                  <td>".$rows['Book_title']."</td>
+                  <td>".$rows['Catergory_id']."</td>
+                  <td>".$rows['Author']."</td>
+                  <td>".$rows['Publisher_name']."</td>
+                  <td>".$rows['Copyright_year']."</td>
+                  <td>".$rows['Isbn']."</td>
+                  <td>".$rows['Book_copies']."</td>
+                  <td>".$rows['Status']."</td>
+                  <td>".$rows['Date_added']."</td>
+                  <td> <a href= 'delete.php?del=$rows[Book_id]'> Delete</td>
+                  </tr>
+                  ";
                 }
-             ?>
+            ?>
             
           </table>
       </div>
     </div>
-
 
     <script>
 
@@ -132,7 +120,6 @@
       }
       </script>
   
-
 </body>
 
 </html>
