@@ -86,7 +86,11 @@ $conn->close();
             ?>
        
           </table>
+
       </div>
+
+      <a href="addmember.php" target="_top"> <img src="add.png" alt="Add"/> 
+      
     </div>
 
     <script>
