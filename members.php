@@ -1,29 +1,14 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "MariaDB";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+include('connection.php');
 
-    $sql = "SELECT Firstname, Lastname, Member_id, Gender, Address, Contact, Borrowtype, Year_level, Status FROM member";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            echo "First name: ". ucwords($row["Firstname"]). " - Last name: ". ucwords($row["Lastname"]). " - Member ID: ". $row["Member_id"]. " - Gender: ". $row["Gender"]
-            . " - Address: ". ucwords($row["Address"]). " - Contact: ". $row["Contact"]. " - Year/Level: ". $row["Year_level"]. " - Status: ". ucwords($row["Status"]). "<br>";
-        }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
+$sql = "SELECT * FROM member";
+$result = $conn->query($sql);
+$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -40,16 +25,16 @@
 
         <div class="links">
             <li>
-                <a href="books.html">MY COLLECTION</a>
+                <a href="books.php">MY COLLECTION</a>
             </li>
             <li>
-                <a href="borrow.html">BORROW</a>
+                <a href="borrow.php">BORROW</a>
             </li>
             <li>
-                <a href="members.html">MEMBERS</a>
+                <a href="members.php">MEMBERS</a>
             </li>
             <li>
-                <a href="loginPage.html">LOG OUT</a>
+                <a href="login_page.php">LOG OUT</a>
             </li>
         </div> 
     </nav>
@@ -75,70 +60,81 @@
               <th>Gender</th>
               <th>Address</th>
               <th>Contact</th>
+              <th>Type</th>
               <th>Year/level</th>
               <th>Status</th>
       
             </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td> <img src="trash.png" alt="Trash"/> </td>
-              <td>  <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/> </td>
-            
-            </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>dfcgvh</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td>Germany</td>
-              <td> <img src="trash.png" alt="Trash"/> </td>
-              <td> <a href="updatemember.html" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
-            </tr>
-
+            <?php   // LOOP TILL END OF DATA 
+                while($rows=$result->fetch_assoc())
+                {
+                  echo "
+                  <tr>
+                  <td>".$rows['Firstname']."</td>
+                  <td>".$rows['Lastname']."</td>
+                  <td>".$rows['Member_id']."</td>
+                  <td>".$rows['Gender']."</td>
+                  <td>".$rows['Address']."</td>
+                  <td>".$rows['Contact']."</td>
+                  <td>".$rows['Borrowertype']."</td>
+                  <td>".$rows['Year_level']."</td>
+                  <td>".$rows['Status']."</td>
+                  <td> <a href= 'deletemember.php?del=$rows[Member_id]'>Delete</td>
+                  </tr>
+                  ";
+                }
+            ?>
+       
           </table>
       </div>
     </div>
 
     <script>
 
-      //function to search table
 
-      function search(){
-
-        var input, filter, table, tr, td, i, txtValue;
+    function search()
+    {
+       
+        var input, filter, table, section, column, i, j, txtValue, display;
 
         //get the input user typed
         input = document.getElementById("search");
-  
         filter = input.value.toUpperCase();
         table = document.getElementById("Members");
-        tr = table.getElementsByTagName("tr");
+        section = table.getElementsByTagName("tr");
+        display = false;
       
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
+        for (i = 1; i < section.length; i++) 
+        {
+            display = false
+            for(j=0; j<9; j++)
+            {
+                column = section[i].getElementsByTagName("td")[j];
+                if (column) 
+                {
+                txtValue = column.textContent || column.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                {
+                    display = true;
+                    break;
+                } 
+
+                }
             }
-          }
+
+            if(display) 
+            {
+              section[i].style.display = "";
+            } 
+            else 
+            {
+              section[i].style.display = "none";
+            }
+          
         }
-      }
+    }
       </script>
-  
 
 </body>
 
