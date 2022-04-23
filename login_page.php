@@ -1,33 +1,22 @@
 <?php
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "typePASSWORD";
-    $dbname = "Library";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    //Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include("connection.php");
 
     if (isset($_POST['username'])) {
 
         $uname = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM `user` WHERE Password='$password' AND Username='$uname' limit 1";
+        $sql = "SELECT * FROM user WHERE Password='$password' AND Username='$uname' limit 1";
 
         $result = $conn->query($sql);
-        echo "Result obtained<br>";
+
         if ($result->num_rows > 0){
             header('Location: library.html');
             exit();
         }
         else{
-            echo "You have entered incorrect username/password";
+            header('Location: login_page.php');
             exit();
         }
     }
@@ -36,7 +25,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" a href="styletest.css">
+	<link rel="stylesheet" a href="style.css">
 </head>
 <body>
 
