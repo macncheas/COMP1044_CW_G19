@@ -80,7 +80,7 @@
                   <td>".$rows['Book_copies']."</td>
                   <td>".$rows['Status']."</td>
                   <td>".$rows['Date_added']."</td>
-                  <td> <a href= 'delete.php?del=$rows[Book_id]'> Delete</td>
+                  <td> <a href= 'deletebook.php?del=$rows[Book_id]'> Delete</td>
                   </tr>
                   ";
                 }
@@ -88,6 +88,9 @@
             
           </table>
       </div>
+
+      <a href="addbooks.php" target="_top"> <img src="add.png" alt="Add"/> 
+      
     </div>
 
     <script>
