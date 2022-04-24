@@ -29,15 +29,15 @@
         <div>
             <label>CATEGORY</label> <br>
             <select name="category">
-            <option value="peri">Periodical</option>
-            <option value="eng">English</option>
-            <option value="math">Math</option>
-            <option value="sci">Science</option>
-            <option value="ency">Encyclopedia</option>
-            <option value="phil">Pilipiniana</option>
-            <option value="news">Newspaper</option>
-            <option value="gen">General</option>
-            <option value="ref">References</option>
+            <option value="1">Periodical</option>
+            <option value="2">English</option>
+            <option value="3">Math</option>
+            <option value="4">Science</option>
+            <option value="5">Encyclopedia</option>
+            <option value="6">Pilipiniana</option>
+            <option value="7">Newspaper</option>
+            <option value="8">General</option>
+            <option value="9">References</option>
             </select>
         </div>
 
@@ -62,6 +62,11 @@
             </div>
         
             <div>
+                <label class="heading">ISBN</label> <br>
+                <input class="input" type="text" name="isbn" required>
+            </div>
+        
+            <div>
                 <label class="heading">COPIES AVAILABLE</label> <br>
                 <input class="input" type="text" name="copies_avail" required>
             </div>
@@ -69,19 +74,17 @@
             <div>
             <label>STATUS</label> <br>
             <select name="status">
-            <option value="arch">Archive</option>
-            <option value="dmg">Damage</option>
-            <option value="lost">Lost</option>
-            <option value="new">New</option>
-            <option value="old">Old</option>
+            <option value="Archive">Archive</option>
+            <option value="Damage">Damage</option>
+            <option value="Lost">Lost</option>
+            <option value="New">New</option>
+            <option value="Old">Old</option>
             </select>
             </div>
 
-            <input type="submit" id=" button" name="submit">
+            <input type="submit" value="Save" name="submit" class="button">
         </form>
     
 </body>
 
 </html>
-
-
