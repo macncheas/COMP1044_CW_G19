@@ -1,6 +1,5 @@
 <?php
 
-
 include("connection.php");
 
 $id = $_GET['del'];
@@ -10,7 +9,7 @@ $data = mysqli_query($conn,$sql);
 if($data)
 {
     echo "deleted";
-    header('Location: booktest.php');
+    header('Location: books.php');
     exit();
 }
 else
