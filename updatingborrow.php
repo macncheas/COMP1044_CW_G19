@@ -19,4 +19,9 @@
         `date_return`='$dateReturned' WHERE 
         `Borrow_id`='$borrowID'");
     }
+    
+    header('Location: borrow.php');
+
 ?>
+
+
