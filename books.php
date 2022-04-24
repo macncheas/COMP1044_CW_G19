@@ -2,6 +2,9 @@
     
     include('connection.php');
 
+    error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
     $sql = "SELECT * FROM book";
     $result = $conn->query($sql);
     $conn->close();
@@ -56,7 +59,7 @@
               <th>Category</th>
               <th>Author</th>
               <th>Publisher</th>
-              <th>Publisher Name</th>
+              <th>Publisher Add.</th>
               <th>Copyright year</th>
               <th>ISBN</th>
               <th>Copies Available</th>
@@ -65,7 +68,7 @@
       
             </tr>
             
-            <?php   // LOOP TILL END OF DATA 
+            <?php  
                 while($rows=$result->fetch_assoc())
                 {
                   echo "
@@ -75,6 +78,7 @@
                   <td>".$rows['Catergory_id']."</td>
                   <td>".$rows['Author']."</td>
                   <td>".$rows['Publisher_name']."</td>
+                  <td>".$rows['Book_pub']."</td>
                   <td>".$rows['Copyright_year']."</td>
                   <td>".$rows['Isbn']."</td>
                   <td>".$rows['Book_copies']."</td>
@@ -95,32 +99,51 @@
 
     <script>
 
-      //function to search table
-
-      function search(){
-
-        var input, filter, table, tr, td, i, txtValue;
+function search()
+    {
+       
+        var input, filter, table, section, column, i, j, txtValue, display;
 
         //get the input user typed
         input = document.getElementById("search");
-  
         filter = input.value.toUpperCase();
         table = document.getElementById("Books");
-        tr = table.getElementsByTagName("tr");
+        section = table.getElementsByTagName("tr");
+
+        
+        display = false;
       
         // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
+        for (i = 1; i < section.length; i++) 
+        {
+          
+            display = false
+            for(j=0; j<9; j++)
+            {
+                column = section[i].getElementsByTagName("td")[j];
+                if (column) 
+                {
+                txtValue = column.textContent || column.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) 
+                {
+                    display = true;
+                    break;
+                } 
+
+                }
             }
-          }
+
+            if(display) 
+            { 
+              section[i].style.display = "";
+            } 
+            else 
+            {//will be hidden if no match is found
+              section[i].style.display = "none";
+            }
+          
         }
-      }
+    }
       </script>
   
 </body>
