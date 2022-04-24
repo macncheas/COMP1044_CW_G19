@@ -1,8 +1,9 @@
 <?php
     include('connection.php');
 
-    $sql = "SELECT * FROM borrow/*details*/";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM borrow";
+    $result = $conn->query($sql);
+    $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -28,13 +29,19 @@
                 <a href="members.php">MEMBERS</a>
             </li>
             <li>
-                <a href="loginPage.php">LOG OUT</a>
+                <a href="login_page.php">LOG OUT</a>
             </li>
         </div> 
     </nav>
 
-    <div class="table_borrow">
-        <h2>Borrow details</h2>
+    <div class="table">
+
+        <div>
+            <h2>Borrow details</h2> 
+        <div>
+
+        <div class="table_borrow">
+            
         <table>
             <tr>
               <th>Borrow ID</th>
@@ -47,32 +54,34 @@
               
             </tr>
             <?php   // LOOP TILL END OF DATA 
-                $i=0;
-                while($row = mysqli_fetch_array($result)) {
+                while($rows=$result->fetch_assoc())
+                {
              ?>
             <tr>
                 <!--FETCHING DATA FROM EACH 
                     ROW OF EVERY COLUMN-->
-                <td><?php echo $row['Borrow_id'];?></td>
-                <td><?php echo $row['book_id'];?></td>
-                <td><?php echo $row['Member_id'];?></td>
-                <td><?php echo $row['Date_borrow'];?></td>
-                <td><?php echo $row['Due_date'];?></td>
-                <td><?php echo $row['date_return'];?></td>
-                <td><?php echo $row['borrow_status'];?></td>
-                <td> <a href="updateborrow.php?Borrow_id=<?php echo $row["Borrow_id"]; ?>" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+                <td><?php echo $rows['Borrow_id'];?></td>
+                <td><?php echo $rows['book_id'];?></td>
+                <td><?php echo $rows['Member_id'];?></td>
+                <td><?php echo $rows['Date_borrow'];?></td>
+                <td><?php echo $rows['Due_date'];?></td>
+                <td><?php echo $rows['date_return'];?></td>
+                <td><?php echo $rows['borrow_status'];?></td>
+                <?php echo"
+                  <td> <a href= 'updateborrow.php?Borrow_id=$rows[Borrow_id]'>Edit</td>
+                  </tr>
+                  "; ?>
   
             </tr>
             <?php
-            $i++;
                 }
              ?>
        
-          </table>
+        </table>
+
+        </div>
     </div>
 
-
-  
 
 </body>
 
