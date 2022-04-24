@@ -26,7 +26,7 @@
     
     <h2>Update Member Details</h2>
     
-    <form class="form" method="post" action="updatingmember.php"> 
+    <form class="form" method="post" <?php echo "action='updatingmember.php?Member_id=$row[Member_id]'" ?>> 
 
         <div>
             <label>NAME</label> <br>
