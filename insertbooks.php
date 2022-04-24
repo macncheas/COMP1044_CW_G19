@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
-
     include_once 'connection.php';  
 
     $ti=$_GET['title'];
@@ -21,5 +18,8 @@ ini_set('display_errors', 'On');
             '$st', '$is')";
 
     mysqli_query($conn, $sql);
+
+    header('Location: books.php');
+
 
 ?>
