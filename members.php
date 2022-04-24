@@ -78,12 +78,13 @@ $conn->close();
                   <td>".$rows['Contact']."</td>
                   <td>".$rows['Borrowertype']."</td>
                   <td>".$rows['Year_level']."</td>
-                  <td>".$rows['Status']."</td>
+                  <td>".$rows['Status']."</td> 
+                  <td> <a href= 'updatemember.php?Member_id=$rows[Member_id]'>Edit</td>
                   <td> <a href= 'deletemember.php?del=$rows[Member_id]'>Delete</td>
                   </tr>
                   ";
-                }
-            ?>
+                  
+                }?>
        
           </table>
 
@@ -106,6 +107,8 @@ $conn->close();
         filter = input.value.toUpperCase();
         table = document.getElementById("Members");
         section = table.getElementsByTagName("tr");
+
+        //since we want to check every column for a match, if display is true then we will not hide the row.
         display = false;
       
         // Loop through all table rows, and hide those who don't match the search query
@@ -132,7 +135,7 @@ $conn->close();
               section[i].style.display = "";
             } 
             else 
-            {
+            { //will be hidden if no match is found
               section[i].style.display = "none";
             }
           
