@@ -26,4 +26,7 @@ if(count($_POST)>0) {
         `Member_id`='$memberID'");
 }
 
+header('Location: members.php');
+
+
 ?> 
