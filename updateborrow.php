@@ -1,8 +1,7 @@
 <?php
     include("connection.php");
 
-    $result = mysqli_query($conn, "SELECT * FROM `borrow` WHERE 
-            `Borrow_id` ='" . $_GET['Borrow_id'] . "'");
+    $result = mysqli_query($conn, "SELECT * FROM `borrow` WHERE `Borrow_id` ='" . $_GET['Borrow_id'] . "'");
     $row = mysqli_fetch_array($result);
 ?>
 
@@ -20,9 +19,6 @@
 
         <div class="links">
             <li>
-                <a href="borrow.php">SAVE</a>
-            </li>
-            <li>
                 <a href="borrow.php">BACK</a>
             </li>
         </div> 
@@ -30,7 +26,6 @@
     
     <h2>Update Borrow Details</h2>
     
-
     <form class="form" method="post" action="updatingborrow.php"> 
 
         <div>
