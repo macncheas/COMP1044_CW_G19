@@ -1,16 +1,6 @@
 <?php
     include("connection.php");
 
-    if(count($_POST)>0) {
-        mysqli_query($conn, "UPDATE `borrow` SET 
-        `Member_id`='" . $_POST['Member_id'] . "',
-        `Date_borrow`='" . $_POST['Date_borrow'] . "',
-        `Due_date`='" . $_POST['Due_date'] . "',
-        `book_id`='" . $_POST['book_id'] . "',
-        `borrow_status`='" . $_POST['borrow_status'] . "',
-        `date_return`='" . $_POST['date_return'] . "' WHERE 
-        `Borrow_id`='" . $_POST['Borrow_id'] . "'");
-    }
     $result = mysqli_query($conn, "SELECT * FROM `borrow` WHERE 
             `Borrow_id` ='" . $_GET['Borrow_id'] . "'");
     $row = mysqli_fetch_array($result);
@@ -41,31 +31,31 @@
     <h2>Update Borrow Details</h2>
     
 
-    <form class="form" method="post" action="updateborrow.php"> 
+    <form class="form" method="post" action="updatingborrow.php"> 
 
         <div>
             <label>BORROW ID</label> <br>
-             <input class="input" type="text" value="<?php echo $row['Borrow_id'] ?>"> <br>
+             <input class="input" type="text" name="BorrowID" value="<?php echo $row['Borrow_id'] ?>"> <br>
             </div>
 
             <div>
                 <label class="heading">MEMBER ID</label> <br>
-                <input class="input" type="text" value="<?php echo $row['Member_id'] ?>">
+                <input class="input" type="text" name="MemberID" value="<?php echo $row['Member_id'] ?>">
             </div>
         
             <div>
                 <label class="heading">DATE BORROWED</label> <br>
-                <input class="input" type="text" value="<?php echo $row['Date_borrow'] ?>">
+                <input class="input" type="text" name="DateBorrowed" value="<?php echo $row['Date_borrow'] ?>">
             </div>
         
             <div>
                 <label class="heading">DUE DATE</label> <br>
-                <input class="input" type="text" value="<?php echo $row['Due_date'] ?>">
+                <input class="input" type="text" name="DueDate" value="<?php echo $row['Due_date'] ?>">
             </div>
 
             <div>
                 <label>BOOK ID</label> <br>
-                <input class="input" type="text" value="<?php echo $row['book_id'] ?>"> 
+                <input class="input" type="text" name="BookID" value="<?php echo $row['book_id'] ?>"> 
             </div>
 
             <!--<div>
@@ -75,15 +65,15 @@
 
             <div>
                 <label>BORROW STATUS</label> <br>
-                <select name="borrow_status">
+                <select name="BorrowStatus">
                 <option value="return">Returned</option>
-                <option value="eng">Pending</option>
+                <option value="pending">Pending</option>
                 </select>
             </div>
         
             <div>
                 <label class="heading">DATE RETURNED</label> <br>
-                <input class="input" type="text" value="<?php echo $row['date_return'] ?>">
+                <input class="input" type="text" name="DateReturned" value="<?php echo $row['date_return'] ?>">
             </div>
     
             <input type="submit" value="Save" name="submit" class="button">
