@@ -2,7 +2,7 @@
 
 include('connection.php');  
 
-//$memberID=$_POST['ID'];
+$memberID=$_GET['Member_id'];
 $firstName=$_POST['FirstName'];
 $lastName=$_POST['LastName'];
 $gender=$_POST['Gender'];
@@ -19,12 +19,11 @@ if(count($_POST)>0) {
         `Lastname`='$lastName',
         `Gender`='$gender',
         `Address`='$address',
-        `Contact`='$contact'  
-        `Borrowertype`='$borrowerType' 
-        `Year_level`='$yearLevel'  
+        `Contact`='$contact',  
+        `Borrowertype`='$borrowerType', 
+        `Year_level`='$yearLevel',  
         `Status`='$status' WHERE 
-        `Member_id`=$_POST['Member_id']");
-
+        `Member_id`='$memberID'");
 }
 
 ?> 
