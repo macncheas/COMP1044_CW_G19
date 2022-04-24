@@ -96,21 +96,20 @@ h2{
 
 .table_members{
 
-    margin-left: 11%;
-
+    margin-left: 10%;
 
 }
 
 .table_books{
 
-    margin-left: 7%;
+    margin-left: 2%;
 
 }
 
 .table_borrow{
 
-    margin-left: 7%;
-
+    margin-left: 11%;
+    
 }
 
 .table{
@@ -124,13 +123,25 @@ td, th {
     flex: auto;
 }
 
+tr:nth-child(even) {
+    background-color: rgb(255, 242, 226);
+}
 
 
-/*button*/
+/*edit and delete button*/
 
 table img{
 
     margin-right: 20%;
     height: 50px;
     width: 60px;
+}
+
+/*add button*/
+
+a img{
+
+    height: 60px;
+    width: 60px;
+    
 }
