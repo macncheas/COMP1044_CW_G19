@@ -1,9 +1,8 @@
 <?php
     include('connection.php');
 
-    $sql = "SELECT * FROM borrowdetails";
-    $result = $conn->query($sql);
-    $conn->close();
+    $sql = "SELECT * FROM borrow/*details*/";
+    $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -48,23 +47,24 @@
               
             </tr>
             <?php   // LOOP TILL END OF DATA 
-                while($rows=$result->fetch_assoc())
-                {
+                $i=0;
+                while($row = mysqli_fetch_array($result)) {
              ?>
             <tr>
                 <!--FETCHING DATA FROM EACH 
                     ROW OF EVERY COLUMN-->
-                <td><?php echo $rows['Borrow_id'];?></td>
-                <td><?php echo $rows['Book_id'];?></td>
-                <td><?php echo $rows['Member_id'];?></td>
-                <td><?php echo $rows['Date_borrow'];?></td>
-                <td><?php echo $rows['Due_date'];?></td>
-                <td><?php echo $rows['Date_return'];?></td>
-                <td><?php echo $rows['Borrow_status'];?></td>
-                <td> <a href="updateborrow.php" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
+                <td><?php echo $row['Borrow_id'];?></td>
+                <td><?php echo $row['book_id'];?></td>
+                <td><?php echo $row['Member_id'];?></td>
+                <td><?php echo $row['Date_borrow'];?></td>
+                <td><?php echo $row['Due_date'];?></td>
+                <td><?php echo $row['date_return'];?></td>
+                <td><?php echo $row['borrow_status'];?></td>
+                <td> <a href="updateborrow.php?Borrow_id=<?php echo $row["Borrow_id"]; ?>" target="_top"> <img src="edit.png" alt="Edit"/>  </td>
   
             </tr>
             <?php
+            $i++;
                 }
              ?>
        
